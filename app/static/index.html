@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>АДК РУС - Парсер Avito</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="app-shell">
+  <header class="topbar">
+    <div class="brand-lockup">
+      <img class="brand-logo" src="/static/adk-rus-logo.ico" alt="АДК РУС">
+      <div class="brand-copy">
+        <strong>АДК РУС</strong>
+        <span>ПАРСЕР AVITO</span>
+      </div>
+    </div>
+    <div class="topbar-context">
+      <span class="topbar-kicker">РАБОЧАЯ ОБЛАСТЬ</span>
+      <span>Сбор объявлений и выгрузка в Excel</span>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="control-rail" aria-label="Параметры новой задачи">
+      <div class="rail-heading">
+        <span class="section-eyebrow">НОВАЯ ЗАДАЧА</span>
+        <h1>Запуск парсинга</h1>
+        <p>Настройте выдачу Avito и отправьте задачу в обработку.</p>
+      </div>
+
+      <div class="field links-field">
+        <label>Ссылки Avito <span id="linksCount" class="muted"></span></label>
+        <div id="linksList"></div>
+        <button type="button" class="link-btn" id="addLinkBtn">+ Добавить ссылку</button>
+      </div>
+
+      <div class="field limit-field">
+        <label for="limitPerLink">Объявлений на ссылку</label>
+        <input type="number" id="limitPerLink" min="0" value="0">
+        <p class="hint">0 - собрать всю доступную выдачу.</p>
+      </div>
+
+      <div class="option-group">
+        <label class="toggle-row"><input type="checkbox" id="onlyRegion" checked><span>Только выбранный регион</span></label>
+        <label class="toggle-row"><input type="checkbox" id="mergeFile" checked><span>Объединить в один файл</span></label>
+      </div>
+
+      <div class="advanced-settings">
+        <span class="section-eyebrow">НАСТРОЙКИ</span>
+        <details class="field">
+          <summary>Колонки <span class="summary-count"><span id="colsSelectedCount">0</span> / <span id="colsTotalCount">0</span></span></summary>
+          <div id="columnsList" class="columns-list"></div>
+        </details>
+
+        <details class="field">
+          <summary>Прокси</summary>
+          <textarea id="proxiesText" rows="4" placeholder="host:port:login:pass - по одной на строку"></textarea>
+          <div class="setting-action"><button type="button" class="link-btn" id="saveProxiesBtn">Сохранить прокси</button><span id="proxiesStatus" class="muted"></span></div>
+        </details>
+
+        <details class="field">
+          <summary>Ключ 2captcha</summary>
+          <input type="text" id="captchaKeyInput" placeholder="API-ключ с 2captcha.com">
+          <div class="setting-action"><button type="button" class="link-btn" id="saveCaptchaKeyBtn">Сохранить ключ</button><span id="captchaKeyStatus" class="muted"></span></div>
+        </details>
+
+        <details class="field">
+          <summary>Ключ spfa.ru</summary>
+          <input type="text" id="cookieServiceKeyInput" placeholder="API-ключ из профиля spfa.ru">
+          <div class="setting-action"><button type="button" class="link-btn" id="saveCookieServiceKeyBtn">Сохранить ключ</button><span id="cookieServiceKeyStatus" class="muted"></span></div>
+        </details>
+      </div>
+
+      <button type="button" id="startBtn" class="primary-btn">Запустить парсинг <span aria-hidden="true">&#8594;</span></button>
+      <p id="formError" class="error-text"></p>
+    </aside>
+
+    <section class="workspace" aria-label="Задачи парсинга">
+      <div class="workspace-heading">
+        <div>
+          <span class="section-eyebrow">ОПЕРАЦИОННЫЙ ПУЛЬТ</span>
+          <h2>Задачи</h2>
+        </div>
+        <span class="workspace-note">Статус обновляется автоматически</span>
+      </div>
+      <div id="taskStats" class="task-stats" aria-live="polite"></div>
+      <section class="tasks-panel">
+        <div class="tasks-panel-heading">
+          <div>
+            <span class="section-eyebrow">ОЧЕРЕДЬ И ИСТОРИЯ</span>
+            <h3>Последние задачи</h3>
+          </div>
+          <span class="tasks-refresh">Обновление каждые 3 сек.</span>
+        </div>
+        <div id="tasksList" class="tasks-list"></div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+playwright
+openpyxl
+pydantic
+aiosqlite
+jinja2
+python-multipart
+2captcha-python
