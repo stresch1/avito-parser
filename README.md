@@ -27,53 +27,6 @@ https://github.com/stresch1/avito-parser/releases/download/v1.0.0/AvitoParser.zi
 
 Важно: ключи, прокси, база задач и Excel-выгрузки не входят в репозиторий. Они хранятся локально на компьютере пользователя.
 
-## Где exe лежит локально
-
-На текущем компьютере готовые сборки уже есть. Самая свежая сборка без ключей:
-
-```text
-C:\Users\Admin\Desktop\claude code\AvitoParser\release\package-20260907\without-keys\AvitoParser.exe
-```
-
-Также есть свежая сборка с иконкой:
-
-```text
-C:\Users\Admin\Desktop\claude code\AvitoParser\release\package-icon-20260907\AvitoParser.exe
-```
-
-Эти файлы не добавлены в git-репозиторий как обычные исходники. Для скачивания с GitHub их нужно прикрепить к GitHub Release.
-
-## Запуск из исходников
-
-Требования:
-
-- Windows
-- Python 3.14+
-- Установленные зависимости из `requirements.txt`
-- Установленные браузеры Playwright
-
-Установка и запуск:
-
-```powershell
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-playwright install chromium
-uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
-
-После запуска откройте:
-
-```text
-http://127.0.0.1:8000
-```
-
-Если используется готовая локальная сборка проекта, можно запустить:
-
-```powershell
-run.bat
-```
-
 ## Как пользоваться
 
 1. Откройте приложение.
@@ -88,14 +41,14 @@ run.bat
 
 Avito может ограничивать частые запросы. Для стабильной работы на больших объемах рекомендуется использовать прокси.
 
+Также для обхода капчи используются cookie с сайта `spfa.ru`.
+
 Форматы прокси:
 
 ```text
 host:port
 host:port:login:pass
 ```
-
-Ключи и приватные настройки хранятся в локальной папке `data/` и не публикуются в GitHub.
 
 ## Структура проекта
 
@@ -110,15 +63,3 @@ desktop.py           запуск desktop-сборки
 desktop.spec         конфигурация сборки PyInstaller
 tests/               тесты
 ```
-
-## Что не публикуется в GitHub
-
-В репозиторий намеренно не добавляются:
-
-- `data/` с ключами, прокси, базой задач и выгрузками;
-- `venv/`;
-- `build/`, `dist/`, `release/`;
-- временные файлы Python;
-- локальные служебные файлы разработки.
-
-Это сделано, чтобы не отправлять приватные ключи и тяжелые сборочные артефакты в исходный код.
